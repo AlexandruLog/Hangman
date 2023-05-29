@@ -1,3 +1,4 @@
+const hangmanWord = document.getElementById("set-hangman-word");
 let word = [];
 let userHealth = 7;
 
@@ -7,7 +8,6 @@ function setHangmanWord() {
 }
 
 function generateWordSpaces() {
-  const hangmanWord = document.getElementById("set-hangman-word");
   for (let index = 0; index < hangmanWord.value.length; ++index) {
     const newLetter = document.createElement("li");
     word[index] = newLetter;
@@ -20,20 +20,33 @@ function healthStatus() {
   document.getElementById("user-health").textContent = "Vieti: " + userHealth;
 }
 
-//Check letter function
+const lettersUsed = [];
+let usedPos = 0;
 let foundedLetter = 0;
 let exists = false;
 
 function guessLetter() {
-  const hangmanWord = document.getElementById("set-hangman-word");
   const userLetter = document.getElementById("guess-hangman-letter");
-  for (let index = 0; index < hangmanWord.value.length; ++index) {
-    if (userLetter.value === hangmanWord.value[index]) {
-      exists = true;
-      ++foundedLetter;
-      word[index].textContent = userLetter.value;
+  let wasUsed = false;
+  for (let j = 0; j < lettersUsed.length; ++j) {
+    if (lettersUsed[j] === userLetter.value) {
+      wasUsed = true;
     }
   }
+  if (wasUsed == false) {
+    for (let index = 0; index < hangmanWord.value.length; ++index) {
+      if (userLetter.value === hangmanWord.value[index]) {
+        exists = true;
+        ++foundedLetter;
+        word[index].textContent = userLetter.value;
+      }
+    }
+  } else {
+    alert("Oops! Ai folosit deja aceasta litera.");
+    ++userHealth;
+  }
+  lettersUsed[usedPos++] = userLetter.value;
+  console.log(foundedLetter);
   checkLetterExistance();
 }
 
