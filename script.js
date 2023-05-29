@@ -1,6 +1,6 @@
 const hangmanWord = document.getElementById("set-hangman-word");
-let word = [];
 let userHealth = 7;
+let word = [];
 
 function setHangmanWord() {
   generateWordSpaces();
@@ -9,10 +9,10 @@ function setHangmanWord() {
 
 function generateWordSpaces() {
   for (let index = 0; index < hangmanWord.value.length; ++index) {
-    const newLetter = document.createElement("li");
-    word[index] = newLetter;
-    newLetter.textContent = "_";
-    document.querySelector(".hangman-details ul").appendChild(newLetter);
+    const newSpace = document.createElement("li");
+    word[index] = newSpace;
+    newSpace.textContent = "_";
+    document.querySelector(".hangman-details ul").appendChild(newSpace);
   }
 }
 
@@ -28,26 +28,30 @@ let exists = false;
 function guessLetter() {
   const userLetter = document.getElementById("guess-hangman-letter");
   let wasUsed = false;
-  for (let j = 0; j < lettersUsed.length; ++j) {
-    if (lettersUsed[j] === userLetter.value) {
-      wasUsed = true;
-    }
-  }
-  if (wasUsed == false) {
-    for (let index = 0; index < hangmanWord.value.length; ++index) {
-      if (userLetter.value === hangmanWord.value[index]) {
-        exists = true;
-        ++foundedLetter;
-        word[index].textContent = userLetter.value;
+  if (userLetter.value == "") {
+    alert("Introduceti o litera.");
+  } else {
+    for (let j = 0; j < lettersUsed.length; ++j) {
+      if (lettersUsed[j] == userLetter.value) {
+        wasUsed = true;
       }
     }
-  } else {
-    alert("Oops! Ai folosit deja aceasta litera.");
-    ++userHealth;
+    if (wasUsed == false) {
+      for (let index = 0; index < hangmanWord.value.length; ++index) {
+        if (userLetter.value == hangmanWord.value[index]) {
+          word[index].textContent = userLetter.value;
+          ++foundedLetter;
+          exists = true;
+        }
+      }
+    } else if (wasUsed == true) {
+      alert("Oops! Ai folosit deja aceasta litera.");
+      ++userHealth;
+    }
+    lettersUsed[usedPos++] = userLetter.value;
+    console.log(foundedLetter);
+    checkLetterExistance();
   }
-  lettersUsed[usedPos++] = userLetter.value;
-  console.log(foundedLetter);
-  checkLetterExistance();
 }
 
 function checkLetterExistance() {
