@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hangman</title>
+    <link rel="shortcut icon" type="icon/png" href="./assets/hangman-game.png" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+  <body>
+    <div class="set-hangman-word">
+      <label for="set-hangman-word">Set the hangman word</label><br />
+      <input type="text" name="set-word" id="set-hangman-word" />
+      <button type="button" onclick="setHangmanWord()">Set</button>
+    </div>
+    <div class="guess-hangman-word">
+      <label for="guess-hangman-letter">Guess a letter</label><br />
+      <input type="text" name="guess-letter" id="guess-hangman-letter" maxlength="1" />
+      <button type="button" onclick="guessLetter()">Check</button>
+    </div>
+    <div class="hangman-details">
+      <ul>
+        <!-- Create the letters of the word -->
+      </ul>
+      <p id="user-health"></p>
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>

@@ -1,0 +1,16 @@
+.set-hangman-word {
+  margin-bottom: 15px;
+}
+
+.set-hangman-word button {
+  width: 52.5px;
+}
+
+/* new word spaces */
+
+ul > li {
+  list-style: none;
+  display: inline;
+  margin-left: 6px;
+  font-size: 1.3rem;
+}
