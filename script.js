@@ -4,7 +4,7 @@ let userHealth = 7;
 let word = [];
 
 function setWord() {
-  document.querySelector(".game-status ul").textContent = null;
+  document.querySelector(".setWord button").disabled = true;
   if (inputSetWord.value) {
     userHealth = 7; // reset health if change the word in the mid of the game
     //generating the spaces
@@ -23,27 +23,29 @@ let expiredIndex = 0;
 let guessedContor = 0;
 
 function checkLetter() {
-  let found = false;
-  if (checkIfExpired() === false) {
-    for (let i = 0; i < inputSetWord.value.length; ++i) {
-      if (inputCheckLetter.value == inputSetWord.value[i]) {
-        word[i].textContent = inputCheckLetter.value;
-        found = true;
-        ++guessedContor;
-        console.log("here");
+  if (inputCheckLetter.value) {
+    let found = false;
+    if (checkIfExpired() === false) {
+      for (let i = 0; i < inputSetWord.value.length; ++i) {
+        if (inputCheckLetter.value == inputSetWord.value[i]) {
+          word[i].textContent = inputCheckLetter.value;
+          found = true;
+          ++guessedContor;
+          console.log("here");
+        }
       }
+      if (found == false) {
+        --userHealth;
+      }
+    } else {
+      alert(inputCheckLetter.value + " was already used!");
     }
-    if (found == false) {
-      --userHealth;
+    if (checkIfExpired() === false) {
+      expired[expiredIndex++] = inputCheckLetter.value; // add in expired letters;
     }
-  } else {
-    alert(inputCheckLetter.value + " was already used!");
+    document.getElementById("health-status").textContent = "Life: " + userHealth;
+    checkGameStatus();
   }
-  if (checkIfExpired() === false) {
-    expired[expiredIndex++] = inputCheckLetter.value; // add in expired letters;
-  }
-  document.getElementById("health-status").textContent = "Life: " + userHealth;
-  checkGameStatus();
 }
 
 function checkGameStatus() {
@@ -63,4 +65,3 @@ function checkIfExpired() {
   });
   return exists;
 }
-console.log(checkIfExpired());
