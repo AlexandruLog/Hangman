@@ -1,71 +1,66 @@
-const hangmanWord = document.getElementById("set-hangman-word");
+const inputSetWord = document.getElementById("input-set-word");
+const inputCheckLetter = document.getElementById("guess-letter");
 let userHealth = 7;
 let word = [];
 
-function setHangmanWord() {
-  generateWordSpaces();
-  healthStatus();
-}
-
-function generateWordSpaces() {
-  for (let index = 0; index < hangmanWord.value.length; ++index) {
-    const newSpace = document.createElement("li");
-    word[index] = newSpace;
-    newSpace.textContent = "_";
-    document.querySelector(".hangman-details ul").appendChild(newSpace);
+function setWord() {
+  document.querySelector(".game-status ul").textContent = null;
+  if (inputSetWord.value) {
+    userHealth = 7; // reset health if change the word in the mid of the game
+    //generating the spaces
+    for (let i = 0; i < inputSetWord.value.length; ++i) {
+      const newSpace = document.createElement("li");
+      newSpace.textContent = "_";
+      word[i] = newSpace;
+      document.querySelector(".game-status ul").appendChild(word[i]);
+    }
+    document.getElementById("health-status").textContent = "Life: " + userHealth;
   }
 }
 
-function healthStatus() {
-  document.getElementById("user-health").textContent = "Vieti: " + userHealth;
-}
+let expired = []; // save used letters;
+let expiredIndex = 0;
+let guessedContor = 0;
 
-const lettersUsed = [];
-let usedPos = 0;
-let foundedLetter = 0;
-let exists = false;
-
-function guessLetter() {
-  const userLetter = document.getElementById("guess-hangman-letter");
-  let wasUsed = false;
-  if (userLetter.value == "") {
-    alert("Introduceti o litera.");
+function checkLetter() {
+  let found = false;
+  if (checkIfExpired() === false) {
+    for (let i = 0; i < inputSetWord.value.length; ++i) {
+      if (inputCheckLetter.value == inputSetWord.value[i]) {
+        word[i].textContent = inputCheckLetter.value;
+        found = true;
+        ++guessedContor;
+        console.log("here");
+      }
+    }
+    if (found == false) {
+      --userHealth;
+    }
   } else {
-    for (let j = 0; j < lettersUsed.length; ++j) {
-      if (lettersUsed[j] == userLetter.value) {
-        wasUsed = true;
-      }
-    }
-    if (wasUsed == false) {
-      for (let index = 0; index < hangmanWord.value.length; ++index) {
-        if (userLetter.value == hangmanWord.value[index]) {
-          word[index].textContent = userLetter.value;
-          ++foundedLetter;
-          exists = true;
-        }
-      }
-    } else if (wasUsed == true) {
-      alert("Oops! Ai folosit deja aceasta litera.");
-      ++userHealth;
-    }
-    lettersUsed[usedPos++] = userLetter.value;
-    console.log(foundedLetter);
-    checkLetterExistance();
+    alert(inputCheckLetter.value + " was already used!");
+  }
+  if (checkIfExpired() === false) {
+    expired[expiredIndex++] = inputCheckLetter.value; // add in expired letters;
+  }
+  document.getElementById("health-status").textContent = "Life: " + userHealth;
+  checkGameStatus();
+}
+
+function checkGameStatus() {
+  if (userHealth == 0) {
+    document.write("You Lost &#128542; Try again.");
+  } else if (guessedContor == inputSetWord.value.length) {
+    document.write("Congrats! You guessed the word &#128521;");
   }
 }
 
-function checkLetterExistance() {
-  if (exists === true) {
-    if (foundedLetter === word.length) {
-      document.write("Felicitari! Ai ghicit cuvantul!");
+function checkIfExpired() {
+  let exists = false;
+  expired.forEach((element) => {
+    if (inputCheckLetter.value === element) {
+      exists = true;
     }
-    exists = false;
-  } else if (exists === false) {
-    --userHealth;
-    if (userHealth === 0) {
-      document.write("Ai pierdut! Incearca din nou!");
-    } else {
-      healthStatus();
-    }
-  }
+  });
+  return exists;
 }
+console.log(checkIfExpired());

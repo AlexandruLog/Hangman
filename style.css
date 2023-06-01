@@ -1,16 +1,17 @@
-.set-hangman-word {
+* {
+  font-family: "Roboto mono";
+}
+
+label {
+  display: block;
+}
+
+input {
   margin-bottom: 15px;
 }
 
-.set-hangman-word button {
-  width: 52.5px;
-}
-
-/* new word spaces */
-
-ul > li {
+.game-status ul li {
+  margin-right: 4px;
   list-style: none;
   display: inline;
-  margin-left: 6px;
-  font-size: 1.3rem;
 }

@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hangman</title>
-    <link rel="shortcut icon" type="icon/png" href="./assets/hangman-game.png" />
+    <meta charset="UTF-8" />
+    <title>Hangman2</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body>
-    <div class="set-hangman-word">
-      <label for="set-hangman-word">Set the hangman word</label><br />
-      <input type="text" name="set-word" id="set-hangman-word" />
-      <button type="button" onclick="setHangmanWord()">Set</button>
+    <div class="setWord">
+      <label for="input-set-word">Set a word</label>
+      <input type="text" name="hangman-word" id="input-set-word" minlength="2" />
+      <button onclick="setWord()">Set</button>
     </div>
-    <div class="guess-hangman-word">
-      <label for="guess-hangman-letter">Guess a letter</label><br />
-      <input type="text" name="guess-letter" id="guess-hangman-letter" maxlength="1" />
-      <button type="button" onclick="guessLetter()">Check</button>
+    <div class="guessLetterDiv">
+      <label for="guess-letter">Letter</label>
+      <input type="text" name="hangman-letter" id="guess-letter" maxlength="1" />
+      <button onclick="checkLetter()">Check</button>
     </div>
-    <div class="hangman-details">
+    <div class="game-status">
       <ul>
-        <!-- Create letters spaces -->
+        <!-- Generating the word letters dynamic -->
       </ul>
-      <p id="user-health"></p>
+      <p id="health-status"></p>
     </div>
+    <script src="./script.js"></script>
   </body>
-  <script src="./script.js"></script>
 </html>
