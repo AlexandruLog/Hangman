@@ -38,7 +38,11 @@ function checkLetter() {
         --userHealth;
       }
     } else {
-      alert(inputCheckLetter.value + " was already used!");
+      document.getElementById("existance-letter-status").textContent =
+        inputCheckLetter.value + " was already used! Try another letter!";
+      setTimeout(() => {
+        document.getElementById("existance-letter-status").textContent = null;
+      }, 4000);
     }
     if (checkIfExpired() === false) {
       expired[expiredIndex++] = inputCheckLetter.value; // add in expired letters;
