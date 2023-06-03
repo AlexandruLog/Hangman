@@ -17,7 +17,7 @@ function setWord() {
   }
 }
 
-let expired = []; // save used letters;
+let expired = []; //save used letters;
 let expiredIndex = 0;
 let guessedContor = 0;
 
