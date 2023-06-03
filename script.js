@@ -6,7 +6,6 @@ let word = [];
 function setWord() {
   document.querySelector(".setWord button").disabled = true;
   if (inputSetWord.value) {
-    userHealth = 7; // reset health if change the word in the mid of the game
     //generating the spaces
     for (let i = 0; i < inputSetWord.value.length; ++i) {
       const newSpace = document.createElement("li");
