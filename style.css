@@ -13,7 +13,11 @@ input {
 }
 
 .game-status ul li {
-  margin-right: 4px;
+  margin-right: 5px;
   list-style: none;
   display: inline;
+}
+
+.hidden {
+  display: none;
 }

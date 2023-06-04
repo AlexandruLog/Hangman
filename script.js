@@ -4,9 +4,10 @@ let userHealth = 7;
 let word = [];
 
 function setWord() {
-  document.querySelector(".setWord button").disabled = true;
   if (inputSetWord.value) {
-    //generating the spaces
+    document.querySelector(".setWord").classList.add("hidden");
+    document.querySelector(".guessLetterDiv").classList.remove("hidden");
+    userHealth = 7;
     for (let i = 0; i < inputSetWord.value.length; ++i) {
       const newSpace = document.createElement("li");
       newSpace.textContent = "_";
@@ -17,7 +18,7 @@ function setWord() {
   }
 }
 
-let expired = []; //save used letters;
+let expired = []; // used letters;
 let expiredIndex = 0;
 let guessedContor = 0;
 
@@ -30,7 +31,6 @@ function checkLetter() {
           word[i].textContent = inputCheckLetter.value;
           found = true;
           ++guessedContor;
-          console.log("here");
         }
       }
       if (found == false) {
@@ -38,10 +38,10 @@ function checkLetter() {
       }
     } else {
       document.getElementById("existance-letter-status").textContent =
-        inputCheckLetter.value + " was already used! Try another letter!";
+        inputCheckLetter.value + " was already used!";
       setTimeout(() => {
         document.getElementById("existance-letter-status").textContent = null;
-      }, 4000);
+      }, 3000);
     }
     if (checkIfExpired() === false) {
       expired[expiredIndex++] = inputCheckLetter.value; // add in expired letters;
@@ -49,6 +49,7 @@ function checkLetter() {
     document.getElementById("health-status").textContent = "Life: " + userHealth;
     checkGameStatus();
   }
+  inputCheckLetter.value = null;
 }
 
 function checkGameStatus() {

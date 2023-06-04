@@ -12,18 +12,18 @@
       <input type="text" name="hangman-word" id="input-set-word" minlength="2" />
       <button onclick="setWord()">Set</button>
     </div>
-    <div class="guessLetterDiv">
+    <div class="guessLetterDiv hidden">
       <label for="guess-letter">Letter</label>
       <input type="text" name="hangman-letter" id="guess-letter" maxlength="1" />
       <button onclick="checkLetter()">Check</button>
     </div>
     <div class="game-status">
-      <h6 id="existance-letter-status"></h6>
+      <h5 id="existance-letter-status"></h5>
       <ul>
         <!-- Generating the word letters dynamically -->
       </ul>
       <p id="health-status"></p>
     </div>
-    <script src="./script.js"></script>
   </body>
+  <script src="./script.js"></script>
 </html>
