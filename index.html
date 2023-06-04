@@ -9,12 +9,26 @@
   <body>
     <div class="setWord">
       <label for="input-set-word">Set a word</label>
-      <input type="text" name="hangman-word" id="input-set-word" minlength="2" />
+      <input
+        type="text"
+        name="hangman-word"
+        id="input-set-word"
+        minlength="2"
+        autocorrect="off"
+        autocapitalize="off"
+      />
       <button onclick="setWord()">Set</button>
     </div>
     <div class="guessLetterDiv hidden">
       <label for="guess-letter">Letter</label>
-      <input type="text" name="hangman-letter" id="guess-letter" maxlength="1" />
+      <input
+        type="text"
+        name="hangman-letter"
+        id="guess-letter"
+        maxlength="1"
+        autocorrect="off"
+        autocapitalize="off"
+      />
       <button onclick="checkLetter()">Check</button>
     </div>
     <div class="game-status">
